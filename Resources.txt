@@ -1,0 +1,26 @@
+Validate JSON
+https://jsonlint.com/
+
+Entity Framework Core
+https://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx
+
+NuGet Packages Used:
+====
+DAL
+====
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Tools
+Microsoft.EntityFrameworkCore.Tools
+Microsoft.AspNetCore.Identity.EntityFrameworkCore
+Microsoft.Extensions.Configuration
+Newtonsoft.Json
+
+
+Reactive Forms
+
+FormGroup
+  -FormControl
+  -FormControl
+  -FormControl
