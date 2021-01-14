@@ -12,8 +12,9 @@ export class EmployeeAdd2Component implements OnInit {
   x = 1;
   // y: number;
   // z: number = 1;
-
-  myForm: FormGroup;
+ // y: number;
+  // z: number = 1;
+  myForm!: FormGroup;
 
   constructor(private toastrService: ToastrService) { }
 

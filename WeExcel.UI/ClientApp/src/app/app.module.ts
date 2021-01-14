@@ -5,16 +5,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { EmployeeAddComponent } from './employee-add/employee-add.component';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeAdd2Component } from './employees/employee-add2/employee-add2.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeAddComponent,
-    EmployeeListComponent,
     EmployeeAdd2Component
   ],
   imports: [
@@ -23,7 +20,8 @@ import { EmployeeAdd2Component } from './employees/employee-add2/employee-add2.c
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    ToastrModule.forRoot(), // ToastrModule added
+    ToastrModule.forRoot(),
+    NgbModule, // ToastrModule added
   ],
   exports: [],
   providers: [],
