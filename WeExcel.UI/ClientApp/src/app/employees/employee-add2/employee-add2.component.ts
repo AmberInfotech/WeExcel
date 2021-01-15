@@ -62,7 +62,6 @@ export class EmployeeAdd2Component implements OnInit {
       // console.log(formattedDate);
       // console.log(formattedDate2);
 
-
       console.log(this.myForm.value);
 
       this.employee = {
