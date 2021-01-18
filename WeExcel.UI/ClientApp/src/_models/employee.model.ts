@@ -1,9 +1,9 @@
 export class Employee {
     firstName!: string;
     lastName!: string;
-    hireDate!: Date;
+    hireDate!: any;
     email!: string;
     age!: number;
-    dateOfBirth!: Date;
+    dateOfBirth!: any;
     pictureId!: number;
 }

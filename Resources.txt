@@ -24,3 +24,10 @@ FormGroup
   -FormControl
   -FormControl
   -FormControl
+
+
+HttpRequests
+https://www.w3schools.com/tags/ref_httpmethods.asp
+
+CORS
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS

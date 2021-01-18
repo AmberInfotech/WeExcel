@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeAdd2Component } from './employees/employee-add2/employee-add2.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EmployeeAdd2Component
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -22,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     ToastrModule.forRoot(),
     NgbModule, // ToastrModule added
+    HttpClientModule,
   ],
   exports: [],
   providers: [],
