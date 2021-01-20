@@ -10,8 +10,8 @@ using WeExcel.DAL.Context;
 namespace WeExcel.DAL.Migrations
 {
     [DbContext(typeof(WeExcelContext))]
-    [Migration("20210111102558_init")]
-    partial class init
+    [Migration("20210120132240_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,12 +224,22 @@ namespace WeExcel.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -238,9 +248,6 @@ namespace WeExcel.DAL.Migrations
 
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(50)")
@@ -251,6 +258,9 @@ namespace WeExcel.DAL.Migrations
 
                     b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("PictureId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

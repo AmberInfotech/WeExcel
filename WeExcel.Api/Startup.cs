@@ -45,6 +45,14 @@ namespace WeExcel.Api
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
             services.AddDbContext<WeExcelContext>(e => e.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddCors(options => {
+                options.AddPolicy("CorsPolicy", builder => 
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +66,7 @@ namespace WeExcel.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("CorsPolicy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

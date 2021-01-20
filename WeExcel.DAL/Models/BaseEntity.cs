@@ -5,6 +5,8 @@ namespace WeExcel.DAL.Models
 {
     public class BaseEntity
     {
+        [Key]
+        public int Id { get; set; }
         [Required]
         public string CreatedBy { get; set; }
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WeExcel.DAL.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,7 +59,10 @@ namespace WeExcel.DAL.Migrations
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: true),
                     HireDate = table.Column<DateTime>(nullable: false),
-                    IsActive = table.Column<bool>(nullable: false)
+                    Email = table.Column<string>(maxLength: 150, nullable: true),
+                    Age = table.Column<int>(nullable: false),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    PictureId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

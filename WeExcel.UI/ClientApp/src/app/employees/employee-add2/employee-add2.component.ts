@@ -37,7 +37,7 @@ export class EmployeeAdd2Component implements OnInit {
           Validators.maxLength(10)])),
       lastName: new FormControl('',
         Validators.compose([Validators.required])),
-      hireDate: new FormControl(new Date()),
+      hireDate: new FormControl(''),
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.maxLength(300),
@@ -68,18 +68,18 @@ export class EmployeeAdd2Component implements OnInit {
       // console.log(formattedDate);
       // console.log(formattedDate2);
 
-      console.log(this.myForm.value);
-
       this.employee = {
         firstName: this.myForm.value.firstName,
         lastName: this.myForm.value.lastName,
         // age: +this.myForm.value.age,
         age: parseInt(this.myForm.value.age),
-        hireDate: formatDate(this.myForm.value.hireDate, 'dd-MMM-yyyy HH:mm:ss', 'en-IN'),
-        dateOfBirth: formatDate(this.myForm.value.dateOfBirth, 'dd-MMM-yyyy HH:mm:ss', 'en-IN'),
+        // hireDate: formatDate(this.myForm.value.dateOfBirth, 'MM-dd-yyyy', 'en-US'),
+        dateOfBirth: formatDate(this.myForm.value.dateOfBirth, 'MM/dd/yyyy hh:mm:ss', 'en-US'),
         email: this.myForm.value.email,
-        pictureId: this.myForm.value.pictureId,
+        pictureId: this.myForm.value.pictureId || 0,
       };
+
+      console.log(this.employee);
 
       this.httpClient.post('https://localhost:44318/api/employee', this.employee)
         .subscribe({
