@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WeExcel.BAL.Dtos;
+using WeExcel.BAL.Interfaces;
 
 namespace WeExcel.Api.Controllers
 {
@@ -12,10 +13,17 @@ namespace WeExcel.Api.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+        IEmployeeService _employeeService;
+        public EmployeeController(IEmployeeService employeeService)
+        {
+            _employeeService = employeeService;
+        }
+
         [HttpPost]
         public IActionResult Post(EmployeeDto employeeDto)
         {
-            return Ok();
+            long id = _employeeService.Add(employeeDto);
+            return Ok(id);
         }
     }
 }

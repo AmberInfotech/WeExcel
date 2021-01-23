@@ -17,9 +17,21 @@ Microsoft.AspNetCore.Identity.EntityFrameworkCore
 Microsoft.Extensions.Configuration
 Newtonsoft.Json
 
+=====
+BAL
+=====
+Dapper
+Dapper.Contrib
+AutoMapper
+Microsoft.Extensions.Configuration
+System.Data.SqlClient
+
 ====
 Api
 ====
+Swashbuckle.AspNetCore.Swagger
+Swashbuckle.AspNetCore.SwaggerGen
+Swashbuckle.AspNetCore.SwaggerUI
 
 Reactive Forms
 
@@ -39,5 +51,10 @@ SQL
 - Primary Key
 - Foreign Key
 - Identity Column (seed, increment)
+
+
+Important C# Concepts
+- Interfaces, Abstract Classes
+- OOP Concepts (Inheritance, Abstraction etc.)
 
 
