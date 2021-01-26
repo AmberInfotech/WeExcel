@@ -10,11 +10,13 @@ import { EmployeeAdd2Component } from './employees/employee-add2/employee-add2.c
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeAdd2Component
+    EmployeeAdd2Component,
+    EmployeeListComponent
   ],
   imports: [
     CommonModule,

@@ -9,6 +9,7 @@ namespace WeExcel.BAL.Services
         public AutoMapperConfiguration()
         {
             CreateMap<EmployeeDto, Employee>();
+            CreateMap<Employee, EmployeeDto>();
         }
     }
 }

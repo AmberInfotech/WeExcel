@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Employee } from '../../../_models/employee.model';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,28 +24,29 @@ export class EmployeeAdd2Component implements OnInit {
 
   constructor(
     private toastrService: ToastrService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     // this.x = 2;
 
     this.myForm = new FormGroup({
-      firstName: new FormControl('',
+      firstName: new FormControl('latif',
         Validators.compose([
           Validators.required,
           //Validators.minLength(10),
           Validators.maxLength(10)])),
-      lastName: new FormControl('',
+      lastName: new FormControl('nadaf',
         Validators.compose([Validators.required])),
-      hireDate: new FormControl(''),
-      email: new FormControl('', Validators.compose([
+      hireDate: new FormControl('01/01/2000 00:00'),
+      email: new FormControl('latuif@mail.com', Validators.compose([
         Validators.required,
         Validators.maxLength(300),
         Validators.email
       ])),
-      age: new FormControl(),
-      dateOfBirth: new FormControl(),
+      age: new FormControl(30),
+      dateOfBirth: new FormControl('01/01/1999 00:00'),
       pictureId: new FormControl()
     });
   }
@@ -71,10 +73,9 @@ export class EmployeeAdd2Component implements OnInit {
       this.employee = {
         firstName: this.myForm.value.firstName,
         lastName: this.myForm.value.lastName,
-        // age: +this.myForm.value.age,
         age: parseInt(this.myForm.value.age),
-        // hireDate: formatDate(this.myForm.value.dateOfBirth, 'MM-dd-yyyy', 'en-US'),
-        dateOfBirth: formatDate(this.myForm.value.dateOfBirth, 'MM/dd/yyyy hh:mm:ss', 'en-US'),
+        hireDate: new Date(this.myForm.value.hireDate),
+        dateOfBirth: new Date(this.myForm.value.dateOfBirth),
         email: this.myForm.value.email,
         pictureId: this.myForm.value.pictureId || 0,
       };
@@ -84,10 +85,12 @@ export class EmployeeAdd2Component implements OnInit {
       this.httpClient.post('https://localhost:44318/api/employee', this.employee)
         .subscribe({
           next: resp => {
-            console.log(resp);
+            this.toastrService.success('Employee saved successfully');
+            this.router.navigateByUrl('/employees');
           },
           error: err => {
             console.log(err);
+            this.toastrService.error('There was an error');
           }
         });
       

@@ -27,7 +27,6 @@ namespace WeExcel.BAL.Services
         }
         #endregion
 
-
         public long Add(EmployeeDto employeeDto)
         {
             using IDbConnection con = connection;
@@ -47,6 +46,18 @@ namespace WeExcel.BAL.Services
             }
 
             return con.Insert(employee);
+        }
+
+        public IEnumerable<EmployeeDto> GetAll()
+        {
+            using IDbConnection con = connection;
+            con.Open();
+
+            var list = con.GetAll<Employee>();
+
+            IEnumerable<EmployeeDto> employeeDto = _mapper.Map<IEnumerable<EmployeeDto>>(list);
+
+            return employeeDto;
         }
     }
 }

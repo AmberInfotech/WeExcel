@@ -1,61 +1,63 @@
-<h1>Add Employee (Reactive Forms)</h1>
+<div class="content p-3">
+    <h2>Add Employee (Reactive Forms)</h2>
 
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-        <div class="col-md-3 form-group">
-            <label for="fname">First Name</label>
-            <input type="text" class="form-control" formControlName="firstName" placeholder="Enter First Name"
-                id="fname" name="fname">
-            <!--Required validation-->
-            <div class="text-danger"
-                *ngIf="myForm.controls['firstName'].errors?.required && myForm.controls['firstName'].touched">
-                First name is required
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <label for="fname">First Name</label>
+                <input type="text" class="form-control" formControlName="firstName" placeholder="Enter First Name"
+                    id="fname" name="fname">
+                <!--Required validation-->
+                <div class="text-danger"
+                    *ngIf="myForm.controls['firstName'].errors?.required && myForm.controls['firstName'].touched">
+                    First name is required
+                </div>
+                <!--Max length validation-->
+                <div class="text-danger" *ngIf="myForm.controls['firstName'].errors?.maxlength">
+                    Max length should not exceed 10 characters
+                </div>
+                <!--Min length validation-->
+                <div class="text-danger" *ngIf="myForm.controls['firstName'].errors?.minlength">
+                    Min length should be 10 characters
+                </div>
             </div>
-            <!--Max length validation-->
-            <div class="text-danger" *ngIf="myForm.controls['firstName'].errors?.maxlength">
-                Max length should not exceed 10 characters
-            </div>
-            <!--Min length validation-->
-            <div class="text-danger" *ngIf="myForm.controls['firstName'].errors?.minlength">
-                Min length should be 10 characters
-            </div>
-        </div>
-        <div class="col-md-3  form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control" formControlName="lastName" placeholder="Enter last name"
-                name="lname">
-            <!--Required validation-->
-            <div class="text-danger"
-                *ngIf="f.lastName.errors?.required && f.lastName.touched">
-                Last name is required
+            <div class="col-md-3  form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" formControlName="lastName" placeholder="Enter last name"
+                    name="lname">
+                <!--Required validation-->
+                <div class="text-danger"
+                    *ngIf="f.lastName.errors?.required && f.lastName.touched">
+                    Last name is required
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 form-group">
-            <label>Email</label>
-            <input type="email" formControlName="email" class="form-control" name="email">
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <label>Email</label>
+                <input type="email" formControlName="email" class="form-control" name="email">
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 form-group">
-            <label>Hire Date</label>
-            <input type="date" formControlName="hireDate" class="form-control" name="hireDate">
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <label>Hire Date</label>
+                <input type="text" formControlName="hireDate" class="form-control" name="hireDate">
+            </div>
+            <div class="col-md-3  form-group">
+                <label>Age</label>
+                <input type="text" formControlName="age" class="form-control" name="age">
+            </div>
         </div>
-        <div class="col-md-3  form-group">
-            <label>Age</label>
-            <input type="text" formControlName="age" class="form-control" name="age">
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <label>Birth Date</label>
+                <input type="text" class="form-control" formControlName="dateOfBirth">
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 form-group">
-            <label>Birth Date</label>
-            <input type="date" class="form-control" formControlName="dateOfBirth">
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success">Save Data</button>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <button type="submit" class="btn btn-success">Save Data</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>

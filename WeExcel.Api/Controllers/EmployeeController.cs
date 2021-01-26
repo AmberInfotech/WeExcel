@@ -25,5 +25,13 @@ namespace WeExcel.Api.Controllers
             long id = _employeeService.Add(employeeDto);
             return Ok(id);
         }
+
+        [HttpGet]  
+        public IActionResult GetAll()
+        {
+            var list = _employeeService.GetAll();
+            return Ok(list);
+        }
+
     }
 }
