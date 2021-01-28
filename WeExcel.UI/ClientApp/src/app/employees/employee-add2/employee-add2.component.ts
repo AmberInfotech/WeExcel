@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Employee } from '../../../_models/employee.model';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -21,32 +21,39 @@ export class EmployeeAdd2Component implements OnInit {
   // z: number = 1;
   myForm!: FormGroup;
   employee!: Employee;
+  loading = false;
+  empId = 0;
+  empName = '';
+  lastName = '';
 
   constructor(
     private toastrService: ToastrService,
     private httpClient: HttpClient,
+    private activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    // this.x = 2;
+    this.empId = this.activatedRoute.snapshot.params['id'] || 0;
+    this.empName = this.activatedRoute.snapshot.params['name'] || '';
+    this.lastName = this.activatedRoute.snapshot.params['lname'] || '';
 
     this.myForm = new FormGroup({
-      firstName: new FormControl('latif',
+      firstName: new FormControl('',
         Validators.compose([
           Validators.required,
           //Validators.minLength(10),
           Validators.maxLength(10)])),
-      lastName: new FormControl('nadaf',
+      lastName: new FormControl('',
         Validators.compose([Validators.required])),
-      hireDate: new FormControl('01/01/2000 00:00'),
-      email: new FormControl('latuif@mail.com', Validators.compose([
+      hireDate: new FormControl(''),
+      email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.maxLength(300),
         Validators.email
       ])),
-      age: new FormControl(30),
-      dateOfBirth: new FormControl('01/01/1999 00:00'),
+      age: new FormControl(0),
+      dateOfBirth: new FormControl(''),
       pictureId: new FormControl()
     });
   }
@@ -56,7 +63,9 @@ export class EmployeeAdd2Component implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     if (this.myForm.invalid) {
+      this.loading = false;
       this.toastrService.warning('Data ia invalid', 'ERROR',
         {
           timeOut: 3000,
@@ -86,14 +95,16 @@ export class EmployeeAdd2Component implements OnInit {
         .subscribe({
           next: resp => {
             this.toastrService.success('Employee saved successfully');
-            this.router.navigateByUrl('/employees');
+            // this.router.navigateByUrl('/employees');
+            this.loading = false;
           },
           error: err => {
+            this.loading = false;
             console.log(err);
             this.toastrService.error('There was an error');
           }
         });
-      
+
     }
   }
 

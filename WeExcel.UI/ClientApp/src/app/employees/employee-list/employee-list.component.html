@@ -1,20 +1,40 @@
 <div class="content p-3">
     <h2>View Employees</h2>
 </div>
+<div>
+    <img [hidden]="!loading" src="../../../assets/loader.gif">
+</div>
 <table class="table">
     <thead>
         <tr>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Age</th>
+            <th>Hire date</th>
+            <th>Birth date</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let emp of employees">
             <td>
-                {{emp.firstName}}
+                <!-- <a routerLink="/employees/edit/{{emp.id}}/{{emp.firstName}}">
+                    {{emp.firstName}}</a> -->
+
+                <a [routerLink]="['/employees/edit/', emp.id, emp.firstName, emp.lastName]">
+                    {{emp.firstName}}
+                </a>
             </td>
             <td>
                 {{emp.lastName}}
+            </td>
+            <td>
+                {{emp.age}}
+            </td>
+            <td>
+                {{emp.hireDate | date : 'dd-MM-yyyy'}}
+            </td>
+            <td>
+                {{emp.dateOfBirth | date : 'dd/MMM/yy'}}
             </td>
         </tr>
     </tbody>

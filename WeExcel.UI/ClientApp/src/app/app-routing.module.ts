@@ -6,7 +6,8 @@ import { EmployeeListComponent } from './employees/employee-list/employee-list.c
 
 const routes: Routes = [
   { path: 'employees', component: EmployeeListComponent },
-  { path: 'employees/add2', component: EmployeeAdd2Component }
+  { path: 'employees/add2', component: EmployeeAdd2Component },
+  { path: 'employees/edit/:id/:name/:lname', component: EmployeeAdd2Component }
 ];
 
 @NgModule({
