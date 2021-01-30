@@ -8,5 +8,6 @@ namespace WeExcel.BAL.Interfaces
         long Add(EmployeeDto employeeDto);
         IEnumerable<EmployeeDto> GetAll();
         EmployeeDto GetById(int id);
+        bool Update(int id, EmployeeDto employeeDto);
     }
 }

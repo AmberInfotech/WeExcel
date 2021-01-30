@@ -38,7 +38,7 @@ namespace WeExcel.BAL.Services
             // employee.FirstName = employeeDto.FirstName;
             // employee.LastName = employeeDto.LastName;
 
-            if(employee!=null)
+            if (employee != null)
             {
                 employee.CreatedBy = "sdasdsadasda";
                 employee.CreatedOn = DateTime.Now;
@@ -58,6 +58,46 @@ namespace WeExcel.BAL.Services
             IEnumerable<EmployeeDto> employeeDto = _mapper.Map<IEnumerable<EmployeeDto>>(list);
 
             return employeeDto;
+        }
+
+        public EmployeeDto GetById(int id)
+        {
+            using IDbConnection con = connection;
+            con.Open();
+
+            var list = con.Get<Employee>(id);
+
+            EmployeeDto employeeDto = _mapper.Map<EmployeeDto>(list);
+
+            return employeeDto;
+        }
+
+        public bool Update(int id, EmployeeDto employeeDto)
+        {
+            using IDbConnection con = connection;
+            con.Open();
+
+            var existing = con.Get<Employee>(id);
+            if (existing == null)
+            {
+                throw new Exception("No such record");
+            }
+
+            // Map EmployeeDto to Employee model class
+            Employee employee = _mapper.Map<Employee>(employeeDto);
+            if (employee != null)
+            {
+                employee.Id = id;
+                employee.CreatedBy = existing.CreatedBy;
+                employee.CreatedOn = existing.CreatedOn;
+
+                employee.ModifiedBy = "munish";
+                employee.ModifiedOn = DateTime.Now;
+
+                bool result = con.Update(employee);
+                return result;
+            }
+            return false;
         }
     }
 }

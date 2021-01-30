@@ -1,9 +1,9 @@
 <div class="content p-3">
-    <h4> 
-        {{ (empId === 0) ? 'Add' : 'Edit'  }}
+    <h4>
+        {{ (empId === 0) ? 'Add' : 'Edit' }}
         Employee (Reactive Forms)
         <span style="color:red">
-             {{empName}} {{lastName}} ({{empId}})
+            {{empName}} {{lastName}} ({{empId}})
         </span>
     </h4>
     <div style="text-align: left;">
@@ -64,7 +64,9 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <button type="submit" [disabled]="loading" class="btn btn-success">Save Data</button>
+                <button type="submit" [disabled]="loading" class="btn btn-success">
+                    {{empId === 0 ? 'Save' : 'Update'}}
+                    Data</button>
             </div>
         </div>
     </form>

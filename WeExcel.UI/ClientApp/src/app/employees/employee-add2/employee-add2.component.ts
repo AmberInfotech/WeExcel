@@ -38,6 +38,10 @@ export class EmployeeAdd2Component implements OnInit {
     this.empName = this.activatedRoute.snapshot.params['name'] || '';
     this.lastName = this.activatedRoute.snapshot.params['lname'] || '';
 
+    if (this.empId > 0) {
+      this.bindEmployeeDetails();
+    }
+
     this.myForm = new FormGroup({
       firstName: new FormControl('',
         Validators.compose([
@@ -79,33 +83,77 @@ export class EmployeeAdd2Component implements OnInit {
       // console.log(formattedDate);
       // console.log(formattedDate2);
 
-      this.employee = {
-        firstName: this.myForm.value.firstName,
-        lastName: this.myForm.value.lastName,
-        age: parseInt(this.myForm.value.age),
-        hireDate: new Date(this.myForm.value.hireDate),
-        dateOfBirth: new Date(this.myForm.value.dateOfBirth),
-        email: this.myForm.value.email,
-        pictureId: this.myForm.value.pictureId || 0,
-      };
-
-      console.log(this.employee);
-
-      this.httpClient.post('https://localhost:44318/api/employee', this.employee)
-        .subscribe({
-          next: resp => {
-            this.toastrService.success('Employee saved successfully');
-            // this.router.navigateByUrl('/employees');
-            this.loading = false;
-          },
-          error: err => {
-            this.loading = false;
-            console.log(err);
-            this.toastrService.error('There was an error');
-          }
-        });
-
+      this.prepareData();
+      if (this.empId === 0) // Add Mode
+      {
+        this.create();
+      } else { // Edit Mode
+        this.update();
+      }
     }
   }
 
+  private prepareData() {
+    this.employee = {
+      firstName: this.myForm.value.firstName,
+      lastName: this.myForm.value.lastName,
+      age: parseInt(this.myForm.value.age),
+      hireDate: new Date(this.myForm.value.hireDate),
+      dateOfBirth: new Date(this.myForm.value.dateOfBirth),
+      email: this.myForm.value.email,
+      pictureId: this.myForm.value.pictureId || 0,
+    };
+  }
+
+  private update() {
+    this.httpClient.put('https://localhost:44318/api/employee/' + this.empId,
+      this.employee)
+      .subscribe({
+        next: resp => {
+          this.toastrService.success('Employee saved successfully');
+          // this.router.navigateByUrl('/employees');
+          this.loading = false;
+        },
+        error: err => {
+          this.loading = false;
+          console.log(err);
+          this.toastrService.error('There was an error');
+        }
+      });
+  }
+
+  private create() {
+    this.httpClient.post('https://localhost:44318/api/employee',
+      this.employee)
+      .subscribe({
+        next: resp => {
+          this.toastrService.success('Employee saved successfully');
+          // this.router.navigateByUrl('/employees');
+          this.loading = false;
+        },
+        error: err => {
+          this.loading = false;
+          console.log(err);
+          this.toastrService.error('There was an error');
+        }
+      });
+  }
+
+  bindEmployeeDetails() {
+    this.httpClient.get('https://localhost:44318/api/employee/' + this.empId)
+      .subscribe({
+        next: resp => {
+          var employee = resp as Employee;
+          this.myForm.patchValue(employee);
+
+          this.toastrService.success('Employee loaded successfully');
+          this.loading = false;
+        },
+        error: err => {
+          this.loading = false;
+          console.log(err);
+          this.toastrService.error('There was an error');
+        }
+      });
+  }
 }
