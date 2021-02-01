@@ -11,12 +11,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
+import { ApplyLeaveComponent } from './leaves/apply-leave/apply-leave.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeAdd2Component,
-    EmployeeListComponent
+    EmployeeListComponent,
+    ApplyLeaveComponent
   ],
   imports: [
     CommonModule,

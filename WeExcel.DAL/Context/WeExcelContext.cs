@@ -21,5 +21,6 @@ namespace WeExcel.DAL.Context
         }
         //entities
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Leave> Leaves { get; set; }
     }
 }

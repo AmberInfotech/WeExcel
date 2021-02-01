@@ -1,0 +1,58 @@
+<h3 class="pt-3 pb-3">Apply Leave</h3>
+<form [formGroup]="leaveForm" (ngSubmit)="onSubmit(leaveForm.value)">
+<!--Row 1-->
+<div class="row pt-3">
+    <div class="col-md-1 form-group">
+        <label>Leave Type</label>
+    </div>
+    <div class="col-md-4">
+        <select formControlName="leaveTypeId" class="form-control">
+            <option value="1">Casual Leave</option>
+            <option value="2">Earned Leave</option>
+        </select>
+    </div>
+    <div class="col-md-1 form-group">
+        <label>Employee</label>
+    </div>
+    <div class="col-md-4">
+        <select formControlName="empId" class="form-control">
+            <option *ngFor="let emp of employees" [value]="emp.id">
+                {{emp.firstName}} {{emp.lastName}}
+            </option>
+        </select>
+    </div>
+</div>
+<!--Row 2-->
+<div class="row">
+    <div class="col-md-1 form-group">
+        <label>From Date</label>
+    </div>
+    <div class="col-md-4">
+        <input type="date" formControlName="fromDate"  class="form-control">
+    </div>
+    <div class="col-md-1 form-group">
+        <label>To Date</label>
+    </div>
+    <div class="col-md-4">
+        <input type="date" formControlName="toDate"   class="form-control">
+    </div>
+</div>
+<!--Row 3-->
+<div class="row">
+    <div class="col-md-1 form-group">
+        <label>Reason</label>
+    </div>
+    <div class="col-md-4">
+        <textarea formControlName="reason"  class="form-control" rows="3"></textarea>
+    </div>
+</div>
+<!--Row 4-->
+<div class="row pt-3">
+    <div class="col-md-1 form-group">
+
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-primary btn-block">Save</button>
+    </div>
+</div>
+</form>

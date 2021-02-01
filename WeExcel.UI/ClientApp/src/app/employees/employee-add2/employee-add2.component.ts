@@ -111,8 +111,8 @@ export class EmployeeAdd2Component implements OnInit {
       .subscribe({
         next: resp => {
           this.toastrService.success('Employee saved successfully');
-          // this.router.navigateByUrl('/employees');
           this.loading = false;
+          this.router.navigateByUrl('/employees');
         },
         error: err => {
           this.loading = false;

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeExcel.DAL.Context;
 
 namespace WeExcel.DAL.Migrations
 {
     [DbContext(typeof(WeExcelContext))]
-    partial class WeExcelContextModelSnapshot : ModelSnapshot
+    [Migration("20210201132736_leave")]
+    partial class leave
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
