@@ -10,6 +10,9 @@
             <option value="1">Casual Leave</option>
             <option value="2">Earned Leave</option>
         </select>
+        <div class="error" [hidden]="leaveForm.controls['leaveTypeId'].valid" >
+            Please select leave type
+        </div>
     </div>
     <div class="col-md-1 form-group">
         <label>Employee</label>
@@ -20,6 +23,9 @@
                 {{emp.firstName}} {{emp.lastName}}
             </option>
         </select>
+        <div class="error">
+            Please select employee
+        </div>
     </div>
 </div>
 <!--Row 2-->
@@ -29,21 +35,33 @@
     </div>
     <div class="col-md-4">
         <input type="date" formControlName="fromDate"  class="form-control">
+        <div class="error" [hidden]="f.fromDate.valid || f.fromDate.pristine">
+          <p *ngIf="f.fromDate.errors?.required">Please select From date</p>  
+        </div>
     </div>
     <div class="col-md-1 form-group">
         <label>To Date</label>
     </div>
     <div class="col-md-4">
-        <input type="date" formControlName="toDate"   class="form-control">
+        <input type="date" formControlName="toDate" class="form-control">
+        <div class="error" 
+        [hidden]="leaveForm.controls['toDate'].valid || leaveForm.controls['toDate'].pristine" >
+          <p *ngIf="leaveForm.controls['toDate'].errors?.required">Please enter To Date</p> 
+        </div>
     </div>
 </div>
 <!--Row 3-->
 <div class="row">
     <div class="col-md-1 form-group">
-        <label>Reason</label>
+        <label>Reason <span class="error">*</span> </label>
     </div>
     <div class="col-md-4">
         <textarea formControlName="reason"  class="form-control" rows="3"></textarea>
+        <div class="error" 
+        [hidden]="leaveForm.controls['reason'].valid || leaveForm.controls['reason'].pristine" >
+          <p *ngIf="leaveForm.controls['reason'].errors?.required">Please enter reason</p> 
+          <p *ngIf="leaveForm.controls['reason'].errors?.maxlength">Reason cannot exceed 250 characters</p>
+        </div>
     </div>
 </div>
 <!--Row 4-->

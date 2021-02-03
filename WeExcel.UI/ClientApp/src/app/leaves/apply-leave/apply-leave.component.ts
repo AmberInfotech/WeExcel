@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { EmployeeDetail } from 'src/_models/employee.model';
+import { Leave } from 'src/_models/leave.model';
 
 @Component({
   selector: 'app-apply-leave',
@@ -41,6 +42,11 @@ export class ApplyLeaveComponent implements OnInit {
     this.bindEmployees();
   }
 
+  // get accessor
+  get f() {
+    return this.leaveForm.controls;
+  }
+
   bindEmployees() {
     this.http.get('https://localhost:44318/api/Employee')
       .subscribe({
@@ -55,11 +61,18 @@ export class ApplyLeaveComponent implements OnInit {
   }
 
   onSubmit(f: any) {
-    if(this.leaveForm.invalid)
-    {
+    if (this.leaveForm.invalid) {
       this.toastr.warning('Please fill all data');
       return;
     }
-    console.log(f);
+    const leave: Leave = {
+      leaveTypeId: f.leaveTypeId,
+      empId: f.empId,
+      fromDate: f.fromDate,
+      toDate: f.toDate,
+      reason: f.reason
+    };
+
+    console.log(leave);
   }
 }
