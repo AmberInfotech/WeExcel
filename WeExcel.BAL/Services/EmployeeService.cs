@@ -99,5 +99,10 @@ namespace WeExcel.BAL.Services
             }
             return false;
         }
+
+        public int Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

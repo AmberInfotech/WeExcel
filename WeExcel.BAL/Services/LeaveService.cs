@@ -87,6 +87,48 @@ namespace WeExcel.BAL.Services
 
             return leave;
         }
+
+        public int Update(int id, LeaveDtos leaveDtos)
+        {
+            using IDbConnection con = connection;
+            con.Open();
+
+            string query = @"update Leaves set 
+                            ModifiedBy = @ModifiedBy, 
+                            ModifiedOn = @ModifiedOn, 
+                            LeaveTypeId = @LeaveTypeId, 
+                            EmpId = @EmpId, 
+                            FromDate=@FromDate, 
+                            ToDate=@ToDate, 
+                            Reason=@Reason where Id = @Id";
+
+            int rowsAffected = con.Execute(query, new
+            {
+                ModifiedBy = "munish chauhan",
+                ModifiedOn = DateTime.Now,
+                LeaveTypeId = leaveDtos.LeaveTypeId,
+                // EmpId = leaveDtos.EmpId
+                leaveDtos.EmpId,
+                leaveDtos.FromDate,
+                leaveDtos.ToDate,
+                leaveDtos.Reason,
+                id
+            }, commandType: CommandType.Text);
+
+            return rowsAffected;
+        }
+
+        public int Delete(int id)
+        {
+            using IDbConnection con = connection;
+            con.Open();
+
+            string query = "delete from Leaves where id = @id";
+
+            int rows = con.Execute(query, new { id }, commandType: CommandType.Text);
+
+            return rows;
+        }
         #endregion
     }
 }

@@ -59,5 +59,32 @@ namespace WeExcel.Api.Controllers
 
             return Ok(leave);
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult Get(int id)
+        {
+            LeaveDtos leave = _leaveService.GetById(id);
+
+            return Ok(leave);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public IActionResult Put(int id, LeaveDtos leaveDto)
+        {
+            int rows = _leaveService.Update(id, leaveDto);
+
+            return Ok(rows);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult Delete(int id)
+        {
+            int rows = _leaveService.Delete(id);
+
+            return Ok(rows);
+        }
     }
 }

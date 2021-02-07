@@ -9,5 +9,6 @@ namespace WeExcel.BAL.Interfaces
         IEnumerable<EmployeeDto> GetAll();
         EmployeeDto GetById(int id);
         bool Update(int id, EmployeeDto employeeDto);
+        int Delete(int id);
     }
 }

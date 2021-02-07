@@ -10,8 +10,8 @@ using WeExcel.DAL.Context;
 namespace WeExcel.DAL.Migrations
 {
     [DbContext(typeof(WeExcelContext))]
-    [Migration("20210201132736_leave")]
-    partial class leave
+    [Migration("20210207125214_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
