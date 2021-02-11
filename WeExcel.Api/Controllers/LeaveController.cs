@@ -25,6 +25,7 @@ namespace WeExcel.Api.Controllers
         }
         #endregion
 
+        #region Leave
         // Method 1 to Add (using Dapper Extensions)
         [HttpPost]
         public IActionResult Post(LeaveDtos leaveDto)
@@ -86,5 +87,26 @@ namespace WeExcel.Api.Controllers
 
             return Ok(rows);
         }
+        #endregion
+
+        #region Leave Types
+        [HttpGet]
+        [Route("leaveTypes")]
+        public IActionResult GetLeaveTypes()
+        {
+            var leaveTypes = _leaveService.GetLeaveTypes();
+
+            return Ok(leaveTypes);
+        }
+
+        [HttpGet]
+        [Route("leaveType/{id}")]
+        public IActionResult GetLeaveType(int id)
+        {
+            var leaveType = _leaveService.GetLeaveType(id);
+
+            return Ok(leaveType);
+        }
+        #endregion
     }
 }

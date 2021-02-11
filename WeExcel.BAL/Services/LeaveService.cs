@@ -129,6 +129,32 @@ namespace WeExcel.BAL.Services
 
             return rows;
         }
+
+        public IEnumerable<LeaveType> GetLeaveTypes()
+        {
+            using IDbConnection con = connection;
+            con.Open();
+
+            string query = "select * from LeaveTypes order by LeaveTypeName";
+
+            IEnumerable<LeaveType> leaveTypes = con.Query<LeaveType>(query);
+
+            return leaveTypes;
+
+        }
+
+        public LeaveType GetLeaveType(int id)
+        {
+            using IDbConnection con = connection;
+            con.Open();
+
+            string query = "select * from LeaveTypes where Id = @id";
+
+            LeaveType leaveType = con.QueryFirstOrDefault<LeaveType>(query, new { id });
+
+            return leaveType;
+
+        }
         #endregion
     }
 }

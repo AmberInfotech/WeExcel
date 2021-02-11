@@ -12,5 +12,7 @@ namespace WeExcel.BAL.Interfaces
         LeaveDtos GetById(int id);
         int Update(int id, LeaveDtos leaveDtos);
         int Delete(int id);
+        IEnumerable<LeaveType> GetLeaveTypes();
+        LeaveType GetLeaveType(int id);
     }
 }

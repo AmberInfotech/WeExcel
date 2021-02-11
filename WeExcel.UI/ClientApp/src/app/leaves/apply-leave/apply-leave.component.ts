@@ -13,6 +13,7 @@ import { Leave } from 'src/_models/leave.model';
 export class ApplyLeaveComponent implements OnInit {
 
   employees: EmployeeDetail[] = [];
+  leaveTypes: any[] = [];
   leaveForm!: FormGroup;
 
   constructor(
@@ -40,6 +41,7 @@ export class ApplyLeaveComponent implements OnInit {
     });
 
     this.bindEmployees();
+    this.bindLeaveTypes();
   }
 
   // get accessor
@@ -52,7 +54,19 @@ export class ApplyLeaveComponent implements OnInit {
       .subscribe({
         next: resp => {
           this.employees = resp as EmployeeDetail[];
-          console.log(this.employees);
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+  }
+
+  bindLeaveTypes() {
+    this.http.get('https://localhost:44318/api/Leave/leaveTypes')
+      .subscribe({
+        next: resp => {
+          this.leaveTypes = resp as any[];
+          console.log(this.leaveTypes);
         },
         error: err => {
           console.log(err);
@@ -63,7 +77,7 @@ export class ApplyLeaveComponent implements OnInit {
   onSubmit(f: any) {
     if (this.leaveForm.invalid) {
       this.toastr.warning('Please fill all data');
-      return;
+      // return;
     }
     const leave: Leave = {
       leaveTypeId: f.leaveTypeId,
