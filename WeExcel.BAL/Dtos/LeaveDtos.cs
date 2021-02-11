@@ -20,4 +20,10 @@ namespace WeExcel.BAL.Dtos
         [Required, MaxLength(250)]
         public string Reason { get; set; }
     }
+
+    public class LeaveListDto: LeaveDtos
+    {
+        public string CreatedBy { get; set; }
+        public DateTime CreatedOn { get; set; }
+    }
 }

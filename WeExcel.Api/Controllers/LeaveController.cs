@@ -56,7 +56,7 @@ namespace WeExcel.Api.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            IEnumerable<LeaveDtos> leave = _leaveService.GetAll();
+            IEnumerable<LeaveListDto> leave = _leaveService.GetAll();
 
             return Ok(leave);
         }

@@ -80,13 +80,22 @@ export class ApplyLeaveComponent implements OnInit {
       // return;
     }
     const leave: Leave = {
-      leaveTypeId: f.leaveTypeId,
-      empId: f.empId,
+      leaveTypeId: +f.leaveTypeId,
+      empId: +f.empId,
       fromDate: f.fromDate,
       toDate: f.toDate,
       reason: f.reason
     };
 
     console.log(leave);
+    this.http.post('https://localhost:44318/api/Leave/option2', leave)
+      .subscribe({
+        next: resp => {
+          console.log(resp);
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
   }
 }

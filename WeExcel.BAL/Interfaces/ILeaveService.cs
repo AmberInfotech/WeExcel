@@ -8,7 +8,7 @@ namespace WeExcel.BAL.Interfaces
     {
         long Add(Leave leave);
         long Add(LeaveDtos leaveDtos);
-        IEnumerable<LeaveDtos> GetAll();
+        IEnumerable<LeaveListDto> GetAll();
         LeaveDtos GetById(int id);
         int Update(int id, LeaveDtos leaveDtos);
         int Delete(int id);

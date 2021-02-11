@@ -58,15 +58,15 @@ namespace WeExcel.BAL.Services
             return id;
         }
 
-        public IEnumerable<LeaveDtos> GetAll()
+        public IEnumerable<LeaveListDto> GetAll()
         {
             using IDbConnection con = connection;
             con.Open();
 
-            string query = @"select LeaveTypeId, EmpId, FromDate, ToDate, Reason    
-                            from Leaves order by CreatedOn desc";
+            string query = @"select LeaveTypeId, EmpId, FromDate, ToDate, Reason, 
+                            CreatedBy, CreatedOn  from Leaves order by CreatedOn desc";
 
-            IEnumerable<LeaveDtos> leaves = con.Query<LeaveDtos>(query);
+            IEnumerable<LeaveListDto> leaves = con.Query<LeaveListDto>(query);
 
             return leaves;
         }
