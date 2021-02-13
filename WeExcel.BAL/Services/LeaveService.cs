@@ -63,10 +63,17 @@ namespace WeExcel.BAL.Services
             using IDbConnection con = connection;
             con.Open();
 
-            string query = @"select LeaveTypeId, EmpId, FromDate, ToDate, Reason, 
-                            CreatedBy, CreatedOn  from Leaves order by CreatedOn desc";
+            //string query = @"select lv.LeaveTypeId, lv.EmpId, lv.FromDate, lv.ToDate, lv.Reason, lv.CreatedBy, lv.CreatedOn,
+            //                emp.FirstName, emp.LastName, lt.LeaveTypeName
+            //                from Leaves lv 
+            //                inner join Employees emp on lv.EmpId = emp.ID
+            //                inner join LeaveTypes lt on lt.ID = lv.LeaveTypeId
+            //                order by lv.CreatedOn desc";
 
-            IEnumerable<LeaveListDto> leaves = con.Query<LeaveListDto>(query);
+            string query = "[GetLeaves]";
+
+            IEnumerable <LeaveListDto> leaves = con.Query<LeaveListDto>(query,
+                commandType: CommandType.StoredProcedure);
 
             return leaves;
         }

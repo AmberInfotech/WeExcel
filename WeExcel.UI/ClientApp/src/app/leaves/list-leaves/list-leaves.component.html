@@ -10,10 +10,10 @@
     </tr>
     <tr *ngFor="let item of leavesList">
         <td>
-            {{item.empId}}
+            {{item.firstName}} {{item.lastName}}
         </td>
         <td>
-            {{item.fromDate | date : 'medium'}}
+            {{item.fromDate | date : 'dd/MMM/yyyy'}}
         </td>
         <td>
             {{item.toDate| date : 'dd-MMM-yyyy'}}
@@ -28,7 +28,7 @@
             {{item.createdOn | date : 'dd-MMM-yyyy'}}
         </td>
         <td>
-            {{item.leaveTypeId}}
+            {{item.leaveTypeName}}
         </td>
     </tr>
 </table>
