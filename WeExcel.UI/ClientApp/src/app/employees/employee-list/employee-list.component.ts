@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { EnvironmentService } from 'src/app/services/environment.service';
 import { EmployeeDetail } from 'src/_models/employee.model';
 
 @Component({
@@ -15,17 +16,18 @@ export class EmployeeListComponent implements OnInit {
 
   constructor(
     private httpClient: HttpClient,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private environmentService: EnvironmentService
   ) { }
 
   ngOnInit(): void {
     this.bindData();
   }
 
-  // https://localhost:44318/api/Employee
   bindData() {
     this.loading = true;
-    this.httpClient.get('https://localhost:44318/api/employee')
+    //this.httpClient.get('https://localhost:44318/api/employee')
+    this.httpClient.get(this.environmentService.baseUrl +  'employee')
       .subscribe({
         next: resp => {
           this.employees = resp as EmployeeDetail[];

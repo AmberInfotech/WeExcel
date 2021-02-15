@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { formatDate } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Employee } from '../../../_models/employee.model';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RepositoryService } from 'src/app/services/repository.service';
 
 
 @Component({
@@ -15,10 +14,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EmployeeAdd2Component implements OnInit {
 
   x = 1;
-  // y: number;
-  // z: number = 1;
-  // y: number;
-  // z: number = 1;
   myForm!: FormGroup;
   employee!: Employee;
   loading = false;
@@ -28,9 +23,10 @@ export class EmployeeAdd2Component implements OnInit {
 
   constructor(
     private toastrService: ToastrService,
-    private httpClient: HttpClient,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private repositoryService: RepositoryService,
+    private router: Router,
+
   ) { }
 
   ngOnInit(): void {
@@ -61,6 +57,7 @@ export class EmployeeAdd2Component implements OnInit {
       pictureId: new FormControl()
     });
   }
+
 
   get f() {
     return this.myForm.controls;
@@ -93,6 +90,56 @@ export class EmployeeAdd2Component implements OnInit {
     }
   }
 
+  bindEmployeeDetails() {
+    const route = `employee/${this.empId}`;
+    this.repositoryService.get(route)
+      .subscribe({
+        next: resp => {
+          this.toastrService.success('Employee fetched successfully');
+          this.loading = false;
+        },
+        error: err => {
+          this.loading = false;
+          console.log(err);
+          this.toastrService.error('There was an error');
+        }
+      });
+  }
+
+  update() {
+    const route = `employee/${this.empId}`;
+    this.repositoryService.put(route, this.employee)
+      .subscribe({
+        next: resp => {
+          this.toastrService.success('Employee updated successfully');
+          this.loading = false;
+          this.router.navigateByUrl('/employees');
+        },
+        error: err => {
+          this.loading = false;
+          console.log(err);
+          this.toastrService.error('There was an error');
+        }
+      });
+  }
+
+  create() {
+    const route = `employee`;
+    this.repositoryService.post(route, this.employee)
+      .subscribe({
+        next: resp => {
+          this.toastrService.success('Employee added successfully');
+          this.loading = false;
+          this.router.navigateByUrl('/employees');
+        },
+        error: err => {
+          this.loading = false;
+          console.log(err);
+          this.toastrService.error('There was an error');
+        }
+      });
+  }
+
   private prepareData() {
     this.employee = {
       firstName: this.myForm.value.firstName,
@@ -105,55 +152,57 @@ export class EmployeeAdd2Component implements OnInit {
     };
   }
 
-  private update() {
-    this.httpClient.put('https://localhost:44318/api/employee/' + this.empId,
-      this.employee)
-      .subscribe({
-        next: resp => {
-          this.toastrService.success('Employee saved successfully');
-          this.loading = false;
-          this.router.navigateByUrl('/employees');
-        },
-        error: err => {
-          this.loading = false;
-          console.log(err);
-          this.toastrService.error('There was an error');
-        }
-      });
-  }
+  // private update() {
+  //   this.httpClient.put(this.environmentService.baseUrl + '/employee/' + this.empId,
+  //     this.employee)
+  //     .subscribe({
+  //       next: resp => {
+  //         this.toastrService.success('Employee saved successfully');
+  //         this.loading = false;
+  //         this.router.navigateByUrl('/employees');
+  //       },
+  //       error: err => {
+  //         this.loading = false;
+  //         console.log(err);
+  //         this.toastrService.error('There was an error');
+  //       }
+  //     });
+  // }
 
-  private create() {
-    this.httpClient.post('https://localhost:44318/api/employee',
-      this.employee)
-      .subscribe({
-        next: resp => {
-          this.toastrService.success('Employee saved successfully');
-          // this.router.navigateByUrl('/employees');
-          this.loading = false;
-        },
-        error: err => {
-          this.loading = false;
-          console.log(err);
-          this.toastrService.error('There was an error');
-        }
-      });
-  }
+  // private create() {
+  //   //this.httpClient.post('https://localhost:44318/api/employee',
+  //   this.httpClient.post(`${this.environmentService.baseUrl}/employee`,
+  //     this.employee)
+  //     .subscribe({
+  //       next: resp => {
+  //         this.toastrService.success('Employee saved successfully');
+  //         // this.router.navigateByUrl('/employees');
+  //         this.loading = false;
+  //       },
+  //       error: err => {
+  //         this.loading = false;
+  //         console.log(err);
+  //         this.toastrService.error('There was an error');
+  //       }
+  //     });
+  // }
 
-  bindEmployeeDetails() {
-    this.httpClient.get('https://localhost:44318/api/employee/' + this.empId)
-      .subscribe({
-        next: resp => {
-          var employee = resp as Employee;
-          this.myForm.patchValue(employee);
+  // bindEmployeeDetails() {
+  //   //this.httpClient.get('https://localhost:44318/api/employee/' + this.empId)
+  //   this.httpClient.get(`${this.environmentService.baseUrl}/employee/${this.empId}`)
+  //     .subscribe({
+  //       next: resp => {
+  //         var employee = resp as Employee;
+  //         this.myForm.patchValue(employee);
 
-          this.toastrService.success('Employee loaded successfully');
-          this.loading = false;
-        },
-        error: err => {
-          this.loading = false;
-          console.log(err);
-          this.toastrService.error('There was an error');
-        }
-      });
-  }
+  //         this.toastrService.success('Employee loaded successfully');
+  //         this.loading = false;
+  //       },
+  //       error: err => {
+  //         this.loading = false;
+  //         console.log(err);
+  //         this.toastrService.error('There was an error');
+  //       }
+  //     });
+  // }
 }
