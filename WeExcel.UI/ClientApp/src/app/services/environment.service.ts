@@ -4,4 +4,5 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class EnvironmentService {
     public baseUrl = environment.baseUrl;
+    public version = environment.version;
 }

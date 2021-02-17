@@ -20,6 +20,9 @@ namespace WeExcel.DAL.Context
             base.OnModelCreating(modelBuilder);
         }
         //entities
+
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Leave> Leaves { get; set; }
         public DbSet<LeaveType> LeaveTypes { get; set; }
