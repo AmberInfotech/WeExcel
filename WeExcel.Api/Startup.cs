@@ -68,6 +68,7 @@ namespace WeExcel.Api
             // register services
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<ILeaveService, LeaveService>();
+            services.AddTransient<IUserService, UserService>();
 
             #region Swagger Service
             services.AddSwaggerGen(options =>

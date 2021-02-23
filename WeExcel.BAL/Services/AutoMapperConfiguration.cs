@@ -12,6 +12,7 @@ namespace WeExcel.BAL.Services
             CreateMap<Employee, EmployeeDto>();
 
             CreateMap<LeaveDtos, Leave>();
+            CreateMap<UserDto, AppUser>();
         }
     }
 }

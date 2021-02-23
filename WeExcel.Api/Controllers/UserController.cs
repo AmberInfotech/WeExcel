@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,22 +17,31 @@ namespace WeExcel.Api.Controllers
     {
         #region DI
         IUserService _userService;
-        public UserController(IUserService userService)
+        IMapper _mapper;
+        public UserController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
         #endregion
 
+        [HttpPost]
         public async Task<IActionResult> Post(UserDto userDto)
         {
             try
             {
-                AppUser appUser= new AppUser();
+                AppUser appUser = _mapper.Map<AppUser>(userDto);
+                if (appUser == null)
+                {
+                    return BadRequest();
+                }
+                // Setting this value on server, instead of front-end
+                appUser.IsActive = true;
                 var userId = await _userService.Add(appUser, userDto.Password);
 
                 return Ok(userId);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest();
             }

@@ -15,6 +15,7 @@ import { ApplyLeaveComponent } from './leaves/apply-leave/apply-leave.component'
 import { ListLeavesComponent } from './leaves/list-leaves/list-leaves.component';
 import { EnvironmentService } from './services/environment.service';
 import { RepositoryService } from './services/repository.service';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { RepositoryService } from './services/repository.service';
     EmployeeAdd2Component,
     EmployeeListComponent,
     ApplyLeaveComponent,
-    ListLeavesComponent
+    ListLeavesComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
