@@ -18,6 +18,7 @@ using WeExcel.BAL.Interfaces;
 using WeExcel.BAL.Services;
 using WeExcel.DAL.Context;
 using WeExcel.DAL.Helper;
+using WeExcel.DAL.Models;
 
 namespace WeExcel.Api
 {
@@ -35,7 +36,7 @@ namespace WeExcel.Api
         {
             services.AddControllers();
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<AppUser, AppRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
                 options.Password.RequiredLength = 6;

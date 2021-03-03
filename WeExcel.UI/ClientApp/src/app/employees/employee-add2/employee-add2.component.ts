@@ -128,9 +128,13 @@ export class EmployeeAdd2Component implements OnInit {
     this.repositoryService.post(route, this.employee)
       .subscribe({
         next: resp => {
-          this.toastrService.success('Employee added successfully');
+          if (resp.status === true) {
+            this.toastrService.success(resp.message);
+            this.router.navigateByUrl('/employees');
+          } else {
+            this.toastrService.error(resp.message);
+          }
           this.loading = false;
-          this.router.navigateByUrl('/employees');
         },
         error: err => {
           this.loading = false;

@@ -27,12 +27,16 @@ export class EmployeeListComponent implements OnInit {
   bindData() {
     this.loading = true;
     //this.httpClient.get('https://localhost:44318/api/employee')
-    this.httpClient.get(this.environmentService.baseUrl +  'employee')
+    this.httpClient.get(this.environmentService.baseUrl + 'employee')
       .subscribe({
-        next: resp => {
-          this.employees = resp as EmployeeDetail[];
-          console.log(this.employees);
-          this.toastrService.success('Employee fetched successfully');
+        next: (resp: any) => {
+          if (resp.status === true) {
+            this.employees = resp.data as EmployeeDetail[];
+            this.toastrService.success(resp.message);
+          } else {
+            this.toastrService.error(resp.message);
+          }
+
           this.loading = false;
         },
         error: err => {
